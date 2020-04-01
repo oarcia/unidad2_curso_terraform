@@ -1,11 +1,11 @@
 provider "aws" {
   version = "~> 2.0"  
-  region  = "us-west-2"
+  region  = "${var.region}"
 }
 
 #creando la vpc
 resource "aws_vpc" "example" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block = "${var.block_cidr}"
   enable_dns_hostnames = true
   tags = {
       Name = "vpc_public"
@@ -14,9 +14,9 @@ resource "aws_vpc" "example" {
 
 resource "aws_subnet" "subnet_course" {
   vpc_id = "${aws_vpc.example.id}"
-  cidr_block = "10.0.15.0/24"
+  cidr_block = "${var.subnet_block_1}"
   map_public_ip_on_launch = true
-  availability_zone = "us-west-2a"
+  availability_zone = "${var.avalability_zone_a}"
 
   tags = {
     Name = "Subnet_course_1"
@@ -25,9 +25,9 @@ resource "aws_subnet" "subnet_course" {
 #subnet de desafio
 resource "aws_subnet" "subnet_course2" {
   vpc_id = "${aws_vpc.example.id}"
-  cidr_block = "10.0.20.0/24"
+  cidr_block = "${var.subnet_block_2}"
   map_public_ip_on_launch = true
-  availability_zone = "us-west-2b"
+  availability_zone = "${var.avalability_zone_b}"
 
   tags = {
     Name = "Subnet_course_2-2b"
@@ -36,9 +36,9 @@ resource "aws_subnet" "subnet_course2" {
 #subnet de desafio
 resource "aws_subnet" "subnet_course3" {
   vpc_id = "${aws_vpc.example.id}"
-  cidr_block = "10.0.25.0/24"
+  cidr_block = "${var.subnet_block_3}"
   map_public_ip_on_launch = true
-  availability_zone = "us-west-2c"
+  availability_zone = "${var.avalability_zone_c}"
 
   tags = {
     Name = "Subnet_course_3-2c"
